@@ -30,9 +30,9 @@ const ScrollToTop = () => {
 const App: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
-  // Replace this path with your actual uploaded logo path
-  // The mix-blend-screen class effectively removes the black background
-  const LOGO_SRC = "/logo.png"; 
+  // Using relative path for better compatibility with simple servers
+  // Ensure your 'logo.png' is in the same folder as index.html (the public root)
+  const LOGO_SRC = "./logo.png"; 
 
   return (
     <Router>
@@ -46,12 +46,12 @@ const App: React.FC = () => {
         <nav className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 md:px-8 py-6 mix-blend-difference bg-gradient-to-b from-[#0f172a]/80 to-transparent backdrop-blur-[2px]">
           <Link to="/" className="font-heading text-xl md:text-2xl font-bold tracking-tighter text-white cursor-pointer z-50 flex items-center gap-2">
               {/* Logo Image with Blend Mode to remove black background */}
+              {/* Note: If the image fails to load, the text fallback below will show */}
               <img 
                 src={LOGO_SRC} 
                 alt="BIZWIZ" 
                 className="h-12 md:h-14 mix-blend-screen object-contain"
                 onError={(e) => {
-                  // Fallback if image fails
                   e.currentTarget.style.display = 'none';
                   e.currentTarget.nextElementSibling?.classList.remove('hidden');
                 }}
